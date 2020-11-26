@@ -1,0 +1,40 @@
+{
+    "buildinfo": [
+    {
+        "prerun": [
+            "curl -sL change-me -o ~/.cache/deb2appimage/debs/deb2appimage.deb"
+        ],
+        "name": "change-me",
+        "version": "linux",
+        "deps": "",
+        "repoarch": "amd64",
+        "distrorepo": "Ubuntu",
+        "repoversion": "focal",
+        "binarypath": "/usr/bin/changeme",
+        "desktoppath": "",
+        "iconpath": "",
+        "usewrapper": "false",
+        "postrun": [
+            null
+        ]
+    }
+    ],
+    "apprunconf": [
+    {
+        "setpath": "true",
+        "setlibpath": "true",
+        "setpythonpath": "false",
+        "setpythonhome": "false",
+        "setpythondontwritebytecode": "false",
+        "setxdgdatadirs": "false",
+        "setperllib": "false",
+        "setgsettingsschemadir": "false",
+        "setqtpluginpath": "false",
+        "exec": "/usr/bin/changeme"
+    }
+    ],
+    "authors": [
+    {},
+    {}
+    ]
+}
