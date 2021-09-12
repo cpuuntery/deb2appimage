@@ -1,0 +1,55 @@
+{
+    "buildinfo": [
+    {
+        "prerun": [
+            "mkdir -p ~/.cache/deb2appimage/AppDir/usr/bin",
+            "curl -sL -o ~/.cache/deb2appimage/AppDir/usr/bin/discord-canary.sh 'https://raw.githubusercontent.com/simoniz0r/deb2appimage/master/scripts/discord-canary.sh'",
+            "chmod a+x ~/.cache/deb2appimage/AppDir/usr/bin/discord-canary.sh",
+            "curl -sL -o ~/.cache/deb2appimage/AppDir/usr/bin/discord-canary.json 'https://raw.githubusercontent.com/simoniz0r/deb2appimage/master/json/discord-canary.json'",
+            "curl -sL -o ~/.cache/deb2appimage/debs/discord-canary.deb 'https://discordapp.com/api/download/canary?platform=linux&format=deb'",
+            "curl -sL -o ~/.cache/deb2appimage/AppDir/usr/bin/deb2appimage 'https://github.com/simoniz0r/deb2appimage/releases/download/v0.0.5/deb2appimage-0.0.5-x86_64.AppImage'",
+            "curl -sL -o ~/.cache/deb2appimage/AppDir/usr/bin/fltk-dialog 'https://raw.githubusercontent.com/simoniz0r/deb2appimage/master/resources/fltk-dialog'",
+            "curl -sSL -I -X GET 'https://discordapp.com/api/download/canary?platform=linux&format=tar.gz' | grep -im1 '^location:' | rev | cut -f1 -d'-' | cut -f3- -d'.' | rev > ~/.cache/deb2appimage/AppDir/usr/bin/discord-canary-version"
+        ],
+        "name": "discord-canary",
+        "version": "latest",
+        "deps": "libnotify4,libatomic1,libxss1,libxtst6,libappindicator1,libnspr4,libnss3,libgconf-2-4",
+        "repoarch": "amd64",
+        "distrorepo": "Debian",
+        "repoversion": "jessie",
+        "binarypath": "/usr/bin/discord-canary",
+        "desktoppath": "/usr/share/discord-canary/discord-canary.desktop",
+        "iconpath": "/usr/share/discord-canary/discord.png",
+        "usewrapper": "true",
+        "postrun": [
+            null
+        ]
+    }
+    ],
+    "apprunconf": [
+    {
+        "setpath": "true",
+        "setlibpath": "true",
+        "setpythonpath": "false",
+        "setpythonhome": "false",
+        "setpythondontwritebytecode": "false",
+        "setxdgdatadirs": "false",
+        "setperllib": "false",
+        "setgsettingsschemadir": "false",
+        "setqtpluginpath": "false",
+        "exec": "discord-canary.sh"
+    }
+    ],
+    "authors": [
+    {
+        "type": "Author",
+        "author": "Discord",
+        "url": "https://discordapp.com"
+    },
+    {
+        "type": "AppImage Maintainer",
+        "author": "simonizor",
+        "url": "http://www.simonizor.net/discord"
+    }
+    ]
+}

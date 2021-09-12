@@ -1,0 +1,52 @@
+{
+    "buildinfo": [
+    {
+        "prerun": [
+            "mkdir -p ~/.cache/deb2appimage/AppDir",
+            "cd ~/.cache/deb2appimage/AppDir",
+            "export LATEST_STABLE_ELECTRON=\"$(curl -sL \"https://electronjs.org/releases/stable\" | grep -m1 '<h2 class=\"release-entry\" id=\"' | cut -f4 -d'\"')\"",
+            "nativefier https://canary.discordapp.com/channels/@me --name discord-electron -e $LATEST_STABLE_ELECTRON --disk-cache-size 10000 --file-download-options '{\"saveAs\": true}' --inject /run/media/simonizor/USBHDD/nativefier/discord.js --fast-quit --icon /run/media/simonizor/USBHDD/nativefier/icon.png --single-instance --honest --internal-urls '.*discord.*'"
+        ],
+        "name": "discord-electron",
+        "version": "0.0.1",
+        "deps": null,
+        "repoarch": null,
+        "distrorepo": null,
+        "repoversion": null,
+        "binarypath": "/discord-electron-linux-x64/discord-electron",
+        "desktoppath": null,
+        "iconpath": "/discord-electron-linux-x64/resources/app/icon.png",
+        "usewrapper": "true",
+        "postrun": [
+            null
+        ]
+    }
+    ],
+    "apprunconf": [
+    {
+        "setpath": "false",
+        "setlibpath": "false",
+        "setpythonpath": "false",
+        "setpythonhome": "false",
+        "setpythondontwritebytecode": "false",
+        "setxdgdatadirs": "false",
+        "setperllib": "false",
+        "setgsettingsschemadir": "false",
+        "setqtpluginpath": "false",
+        "exec": "/discord-electron-linux-x64/discord-electron.wrapper"
+    }
+    ],
+    "authors": [
+    {
+        "type": "Author",
+        "author": "Discord",
+        "url": "https://discordapp.com"
+    },
+    {
+        "type": "AppImage Maintainer",
+        "author": "simonizor",
+        "url": "http://www.simonizor.net"
+    }
+    ]
+}
+
