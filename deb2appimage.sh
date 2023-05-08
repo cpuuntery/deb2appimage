@@ -136,8 +136,13 @@ function getlatestdeb() {
 
 # function that uses jq to get package's deps from build.json
 function getappdeps() {
-read -n 1 -p "Download the dependency (libraries) manually using the browser from packages.ubuntu.com and copy them to $HOME/.cache/deb2appimage/debs
-sudo apt install --no-install-recommends --download-only ksysguard and then sudu zip -r archivename.zip /var/cache/apt/archives" answer
+read -n 1 -p "\n
+copy any deb files to ~/.cache/deb2appimage/debs/
+one way to get deb files
+sudo rm -rf /var/cache/apt/archives
+sudo apt install --no-install-recommends --download-only ksysguard
+cd ~ && sudo zip -0 -r debs.zip /var/cache/apt/archives\n
+you can also get packages from packages.ubuntu.com" answer
     if [[ ! "$(jq -r '.buildinfo[0].deps' "$HOME"/.cache/deb2appimage/build.json)" = "null" ]]; then
         COUNT_NUM=1
         # run a for loop to download the latest version of each deb using getlatestdeb function
@@ -282,9 +287,9 @@ function postruncmd() {
 
 # function that downloads appimagetool and uses it to build the AppImage to the --output directory
 function buildappimage() {
-read -n 1 -p "Copy any missing libraries (.so files) to $HOME/.cache/deb2appimage/AppDir/usr/lib/x86_64-linux-gnu you can search for the library from archlinux.org using google advanced search
+read -n 1 -p "Copy any missing libraries (.so files) to $HOME/.cache/deb2appimage/AppDir/usr/lib/x86_64-linux-gnu or $HOME/.cache/deb2appimage/AppDir/usr/lib/x86_64-aarch64 you can search for the library from archlinux.org using google advanced search
 packages.ubuntu.com is the best source and if you can not find the package/library 99% the issue is with you and not with packages.ubuntu.com
-P.S there more than one way to search my package name or package content" answer
+P.S there more than one way to search by package name or package content" answer
     APP_VERSION="$(jq -r '.buildinfo[0].version' "$HOME"/.cache/deb2appimage/build.json)"
     if [[ -z "$APP_VERSION" ]] || [[ "$APP_VERSION" = "null" ]]; then
         APP_VERSION="$(date +'%F')"
