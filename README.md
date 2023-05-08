@@ -1,5 +1,40 @@
 # deb2appimage
 
+### IF YOU FORGOT TO CREATE AN OUTPUT PATH, THE APPIMAGE WILL NOT BE CREATED
+
+**If you are getting debs for ubuntu 22.04, and later you need to install zstd**
+
+```
+sudo apt install zstd
+```
+My preferred way of running the script
+
+```
+./deb2appimage.sh -j ./my-app.json -o $HOME/AppImages --debug
+```
+
+if you want to make aarch64 you need to do the following after the script create incorrect appimage file
+
+1- change AppRun to load aarch64 libraries
+
+```
+sed -i 's/i386-linux-gnu/aarch64-linux-gnu/g' AppRun
+```
+
+2- create squashfs file from the directory 
+
+```
+mksquashfs /media/mint/download/squashfs-root /home/mint/Desktop/ksys.appimage -comp xz
+```
+
+3- append the runtime-aarch64 to the squashfs file
+
+```
+cat ksys.appimage >> runtime-aarch64
+```
+
+you gan get the runtime from https://github.com/AppImage/AppImageKit/releases/tag/13
+
 deb2appimage uses deb packages from Debian's and/or Ubuntu's repos to build AppImages based on simple JSON configuration.  The debs are downloaded using `curl` and extracted using `ar x` so that AppImages can be built from any distribution.  The JSON configuration files are setup in a way that they should be easy to understand, yet flexible enough to work with AppImages that require extra tweaking before building.  `~/.cache/deb2appimage` is used as a temporary directory for building AppImages, and is deleted after run.
 
 Contrary to the name, deb2appimage may also be used with other package types as the source for the application (or even the deps), but these files must be downloaded and placed manually in a prerun script.
