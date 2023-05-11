@@ -13,6 +13,13 @@ My preferred way of running the script
 ./deb2appimage.sh -j ./my-app.json -o $HOME/AppImages --debug
 ```
 
+extract the appimage using
+
+```
+--appimage-extract
+```
+
+
 if you want to make aarch64 you need to do the following after the script create incorrect appimage file
 
 1- change AppRun to load aarch64 libraries
